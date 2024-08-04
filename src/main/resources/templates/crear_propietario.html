@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Propietario</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+    <h1>Crear Propietario</h1>
+    <form th:action="@{/propietarios/crear}" method="post" th:object="${propietario}">
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" required />
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" required />
+        </div>
+        <div>
+            <label>Selecciona Mascotas:</label>
+            <div th:each="mascota : ${mascotas}">
+                <input type="checkbox" th:id="'mascota-' + ${mascota.id}" th:value="${mascota.id}" name="mascotasIds"/>
+                <label th:for="'mascota-' + ${mascota.id}" th:text="${mascota.nombre}"></label>
+            </div>
+        </div>
+        <button type="submit">Crear</button>
+    </form>
+    <a th:href="@{/}">Cancelar</a>
+</body>
+</html>

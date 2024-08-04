@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Mascota</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+    <h1>Crear Mascota</h1>
+    <div class="create-form-container">
+        <form th:action="@{/mascotas/crear}" method="post" enctype="multipart/form-data" th:object="${mascota}" class="create-form">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" th:field="*{nombre}" required />
+            </div>
+            <div class="form-group">
+                <label for="fechaNac">Fecha de Nacimiento:</label>
+                <input type="date" id="fechaNac" th:field="*{fechaNac}" />
+            </div>
+            <div class="form-group">
+                <label for="raza">Raza:</label>
+                <input type="text" id="raza" th:field="*{raza}" />
+            </div>
+            <div class="form-group">
+                <label for="peso">Peso (kg):</label>
+                <input type="number" id="peso" th:field="*{peso}" />
+            </div>
+            <div class="form-group">
+                <label for="tieneChip">¿Tiene Chip?:</label>
+                <input type="checkbox" id="tieneChip" th:field="*{tieneChip}" />
+            </div>
+            <div class="form-group">
+                <label for="file">Imagen:</label>
+                <input type="file" id="file" name="file">
+            </div>
+            <div class="form-group">
+                <label for="propietarioId">Propietario:</label>
+                <select id="propietarioId" name="propietarioId">
+                    <option value="">-- Sin propietario --</option>
+                    <option th:each="propietario : ${propietarios}" th:value="${propietario.id}" th:text="${propietario.nombre}"></option>
+                </select>
+            </div>
+            <button type="submit" class="submit-button">Crear</button>
+        </form>
+        <div class="cancel-link">
+            <a th:href="@{/}">Cancelar</a>
+        </div>
+    </div>
+</body>
+</html>

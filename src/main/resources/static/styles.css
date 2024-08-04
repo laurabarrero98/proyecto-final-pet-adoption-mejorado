@@ -1,0 +1,218 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    color: white;
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    background-color: #343a40;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0;
+}
+
+nav ul li a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    background-color: #007bff;
+}
+
+table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #dee2e6;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el formulario de búsqueda */
+.search-form {
+    display: flex; /* Utiliza flexbox para alinear los elementos en una fila */
+    align-items: center; /* Centra verticalmente los elementos dentro del formulario */
+}
+
+.search-input {
+    flex: 1; /* Hace que el campo de búsqueda ocupe el máximo ancho disponible */
+    padding: 8px; /* Añade un poco de relleno para que el texto no esté tan pegado a los bordes */
+    margin-right: 10px; /* Espacio entre el campo de búsqueda y el botón */
+    box-sizing: border-box; /* Asegura que el padding no aumente el ancho total del elemento */
+}
+
+.search-button {
+    padding: 8px 12px; /* Añade relleno al botón, hazlo más pequeño que el campo de búsqueda */
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Elimina el borde del botón */
+    border-radius: 4px; /* Esquinas redondeadas del botón */
+    cursor: pointer; /* Cambia el cursor cuando se pasa sobre el botón */
+    font-size: 14px; /* Tamaño de la fuente en el botón */
+    white-space: nowrap; /* Evita que el texto del botón se divida en varias líneas */
+}
+
+.search-button:hover {
+    background-color: #0056b3; /* Color de fondo cuando se pasa el ratón sobre el botón */
+}
+
+@media (max-width: 600px) {
+    table, th, td {
+        display: block;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: right;
+        padding-left: 50%;
+    }
+
+    th {
+        background-color: #343a40;
+        color: white;
+    }
+
+    tbody tr {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.mascota-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mascota-foto {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+.mascota-info {
+    width: 100%;
+    max-width: 500px;
+}
+/* Estilos específicos para el formulario de creación */
+.create-form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-form .form-group {
+    margin-bottom: 15px;
+}
+
+.create-form .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.create-form .form-group input[type="text"],
+.create-form .form-group input[type="date"],
+.create-form .form-group input[type="number"],
+.create-form .form-group input[type="file"],
+.create-form .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.create-form .form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.cancel-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cancel-link a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.cancel-link a:hover {
+    text-decoration: underline;
+}

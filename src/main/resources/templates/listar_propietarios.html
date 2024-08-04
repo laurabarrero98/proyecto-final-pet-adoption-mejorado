@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Propietarios</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+    <h1>Listado de Propietarios</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Mas mascotas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="propietario : ${propietarios}">
+                <td><a th:href="@{/propietarios/{id}(id=${propietario.id})}" th:text="${propietario.nombre}"></a></td>
+                <td th:text="${propietario.email}"></td>
+                <td>
+                    <ul>
+                        <li th:each="mascota : ${propietario.mascotas}">
+                            <a th:href="@{/mascotas/{id}(id=${mascota.id})}">
+                                <img th:src="@{${mascota.urlFoto}}" alt="Foto de la mascota" style="max-width: 50px;"/>
+                                <span th:text="${mascota.nombre}"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/}">Volver</a>
+</body>
+</html>

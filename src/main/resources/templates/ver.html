@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles de Mascota</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+    <h1>Detalles de Mascota</h1>
+    <div class="mascota-container">
+        <img th:src="@{${mascota.urlFoto}}" alt="Foto de Mascota" class="mascota-foto"/>
+        <div class="mascota-info">
+            <p><strong>ID:</strong> <span th:text="${mascota.id}"></span></p>
+            <p><strong>Nombre:</strong> <span th:text="${mascota.nombre}"></span></p>
+            <p><strong>Fecha de Nacimiento:</strong> <span th:text="${#dates.format(mascota.fechaNac, 'dd/MM/yyyy')}"></span></p>
+            <p><strong>Raza:</strong> <span th:text="${mascota.raza}"></span></p>
+            <p><strong>Peso:</strong> <span th:text="${mascota.peso}"></span> kg</p>
+            <p><strong>Tiene Chip:</strong> <span th:text="${mascota.tieneChip ? 'Sí' : 'No'}"></span></p>
+        </div>
+        <a th:href="@{/}" class="btn">Volver a la lista</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de mascotas para adopción</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+    <h1>Registro de mascotas para adopción</h1>
+    <nav>
+        <ul>
+            <li><a th:href="@{/mascotas/crear}">Añadir mascota</a></li>
+            <li><a th:href="@{/mascotas/mas-jovenes}">Ver mascotas jóvenes</a></li>
+            <li><a th:href="@{/?sort=id}">Ordenar por ID</a></li>
+            <li><a th:href="@{/?sort=nombre}">Ordenar por nombre</a></li>
+			<li><a th:href="@{/propietarios/crear}">Añadir propietario</a></li>
+			<li><a th:href="@{/propietarios}">Ver propietarios</a></li>
+		 </ul>
+    </nav>
+    <form method="get" action="/" class="search-form">
+        <input type="text" name="search" th:value="${search}" placeholder="Buscar por nombre o raza" class="search-input"/>
+        <button type="submit" class="search-button">Buscar</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Raza</th>
+                <th>Foto</th>
+                <th>Propietario</th> <!-- Columna para el propietario -->
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="mascota : ${mascotas}">
+                <td th:text="${mascota.id}"></td>
+                <td th:text="${mascota.nombre}"></td>
+                <td th:text="${mascota.raza}"></td>
+                <td><img th:src="@{${mascota.urlFoto}}" alt="Foto de ${mascota.nombre}" width="100" height="100"/></td>
+                <td th:text="${mascota.propietario != null ? mascota.propietario.nombre : 'Sin propietario'}"></td> <!-- Mostrar nombre del propietario o 'Sin propietario' -->
+                <td>
+                    <a th:href="@{/mascotas/{id}(id=${mascota.id})}">Ver</a>
+                    <a th:href="@{/mascotas/eliminar/{id}(id=${mascota.id})}" onclick="return confirm('¿Estás seguro de que quieres eliminar esta mascota?');">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
