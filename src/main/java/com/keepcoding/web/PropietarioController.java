@@ -66,6 +66,6 @@ public class PropietarioController {
 	        }
 	    }
 
-	    return "redirect:/propietarios/"; // Redirige a la lista de propietarios
+	    return "redirect:/propietarios/";
 	}
 }

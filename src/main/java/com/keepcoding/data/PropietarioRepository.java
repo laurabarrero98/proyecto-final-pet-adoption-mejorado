@@ -9,10 +9,8 @@ import java.util.List;
 
 public interface PropietarioRepository extends JpaRepository<Propietario, Long> {
     
-    // Método para obtener propietarios ordenados por primer apellido
     List<Propietario> findAllByOrderByPrimerApellido();
 
-    // Consulta personalizada para búsqueda insensible a mayúsculas y minúsculas
     @Query("SELECT DISTINCT p FROM Propietario p " +
            "LEFT JOIN p.mascotas m " +
            "WHERE LOWER(p.nombre) LIKE LOWER(CONCAT('%', :search, '%')) " +

@@ -33,7 +33,6 @@ public class MascotaController {
 
     private static final String UPLOADED_FOLDER = "src/main/resources/static/images/";
 
- // Listar todas las mascotas y aplicar filtros de búsqueda y ordenación
     @GetMapping
     public String listarMascotas(@RequestParam(name = "search", required = false) String search,
                                  @RequestParam(name = "sort", defaultValue = "id") String sort,
@@ -119,7 +118,7 @@ public class MascotaController {
     public String verMascotasJovenes(Model model) {
         List<Mascota> mascotas = mascotaRepository.findTop20ByOrderByFechaNacAsc();
         model.addAttribute("mascotas", mascotas);
-        return "index"; // O la vista que desees para mostrar las mascotas jóvenes
+        return "index";
     }
 
     @GetMapping("/{id}/asignar-propietario")
@@ -127,13 +126,13 @@ public class MascotaController {
         Optional<Mascota> mascotaOpt = mascotaRepository.findById(id);
         if (mascotaOpt.isPresent()) {
             Mascota mascota = mascotaOpt.get();
-            // Obtener propietarios ordenados alfabéticamente por primerApellido
+            
             List<Propietario> propietarios = propietarioRepository.findAll(Sort.by(Sort.Order.asc("primerApellido"), Sort.Order.asc("nombre")));
             model.addAttribute("mascota", mascota);
             model.addAttribute("propietarios", propietarios);
             return "asignar_propietario";
         }
-        return "redirect:/mascotas"; // Redirige si no se encuentra la mascota
+        return "redirect:/mascotas";
     }
 
 
@@ -169,13 +168,12 @@ public class MascotaController {
 
             mascotaRepository.save(mascota);
         }
-        return "redirect:/mascotas/" + id; // Redirige a los detalles de la mascota
+        return "redirect:/mascotas/" + id;
     }
 
-    // Eliminar una mascota
     @GetMapping("/eliminar/{id}")
     public String eliminarMascota(@PathVariable Long id) {
         mascotaRepository.deleteById(id);
-        return "redirect:/mascotas"; // Redirige a la lista de mascotas
+        return "redirect:/mascotas";
     }
 }
