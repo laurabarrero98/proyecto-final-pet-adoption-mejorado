@@ -6,32 +6,43 @@
     <link rel="stylesheet" th:href="@{/styles.css}" />
 </head>
 <body>
+    <div class="header">
+        <a th:href="@{/mascotas}" class="btn-back">Volver</a>
+    </div>
+
     <h1>Listado de Propietarios</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Mas mascotas</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="propietario : ${propietarios}">
-                <td><a th:href="@{/propietarios/{id}(id=${propietario.id})}" th:text="${propietario.nombre}"></a></td>
-                <td th:text="${propietario.email}"></td>
-                <td>
-                    <ul>
-                        <li th:each="mascota : ${propietario.mascotas}">
-                            <a th:href="@{/mascotas/{id}(id=${mascota.id})}">
-                                <img th:src="@{${mascota.urlFoto}}" alt="Foto de la mascota" style="max-width: 50px;"/>
-                                <span th:text="${mascota.nombre}"></span>
-                            </a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <a th:href="@{/}">Volver</a>
+
+    <form th:action="@{/propietarios}" method="get" class="search-form">
+        <input type="text" id="search" name="search" class="search-input" placeholder="Nombre, Apellidos, Nombre de mascota" th:value="${search}" />
+        <button type="submit" class="search-button">Buscar</button>
+    </form>
+
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre completo</th>
+                    <th>Email de contacto</th>
+                    <th>Mascotas adoptadas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="propietario : ${propietarios}">
+                    <td th:text="${propietario.nombre} + ' ' + ${propietario.primerApellido} + ' ' + ${propietario.segundoApellido}"></td>
+                    <td th:text="${propietario.email}"></td>
+                    <td>
+                        <div class="mascotas-list">
+                            <div th:each="mascota : ${propietario.mascotas}" class="mascota-item">
+                                <a th:href="@{/mascotas/{id}(id=${mascota.id})}" class="mascota-link">
+                                    <img th:src="@{${mascota.urlFoto}}" alt="Foto de la mascota" class="mascota-img"/>
+                                    <span th:text="${mascota.nombre}"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

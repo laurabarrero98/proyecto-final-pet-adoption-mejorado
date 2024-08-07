@@ -22,13 +22,20 @@ public class PropietarioController {
 	@Autowired
 	private MascotaRepository mascotaRepository;
 
-	@GetMapping("/")
-	public String listarPropietarios(Model model) {
-		List<Propietario> propietarios = propietarioRepository.findAll();
-		model.addAttribute("propietarios", propietarios);
-		return "listar_propietarios";
+	@GetMapping({"", "/"})
+	public String listarPropietarios(@RequestParam(name = "search", required = false) String search, Model model) {
+	    List<Propietario> propietarios;
+	    if (search != null && !search.isEmpty()) {
+	        propietarios = propietarioRepository.findDistinctBySearch(search);
+	    } else {
+	        propietarios = propietarioRepository.findAll();
+	    }
+	    model.addAttribute("propietarios", propietarios);
+	    model.addAttribute("search", search);
+	    return "listar_propietarios";
 	}
 
+	
 	@GetMapping("/{id}")
     public String verPropietario(@PathVariable Long id, Model model) {
         Propietario propietario = propietarioRepository.findById(id)
@@ -47,19 +54,18 @@ public class PropietarioController {
 
 	@PostMapping("/crear")
 	public String crearPropietario(@ModelAttribute Propietario propietario,
-			@RequestParam(value = "mascotasIds", required = false) List<Long> mascotasIds) {
+	                                @RequestParam(value = "mascotasIds", required = false) List<Long> mascotasIds) {
+	    propietarioRepository.save(propietario);
 
-		propietarioRepository.save(propietario);
+	    // Asigna las mascotas seleccionadas al propietario
+	    if (mascotasIds != null) {
+	        List<Mascota> mascotas = mascotaRepository.findAllById(mascotasIds);
+	        for (Mascota mascota : mascotas) {
+	            mascota.setPropietario(propietario);
+	            mascotaRepository.save(mascota);
+	        }
+	    }
 
-		// Asigna las mascotas seleccionadas al propietario
-		if (mascotasIds != null) {
-			List<Mascota> mascotas = mascotaRepository.findAllById(mascotasIds);
-			for (Mascota mascota : mascotas) {
-				mascota.setPropietario(propietario);
-				mascotaRepository.save(mascota);
-			}
-		}
-
-		return "redirect:/";
+	    return "redirect:/propietarios/"; // Redirige a la lista de propietarios
 	}
 }

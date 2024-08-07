@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Asignar Propietario</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .btn-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Asignar/Cambiar Propietario</h1>
+    <div class="mascota-container">
+        <img th:src="@{${mascota.urlFoto}}" alt="Foto de Mascota" class="mascota-foto"/>
+        <div class="mascota-info">
+            <p><strong>ID:</strong> <span th:text="${mascota.id}"></span></p>
+            <p><strong>Nombre:</strong> <span th:text="${mascota.nombre}"></span></p>
+            <p><strong>Fecha de Nacimiento:</strong> <span th:text="${#dates.format(mascota.fechaNac, 'dd/MM/yyyy')}"></span></p>
+            <p><strong>Raza:</strong> <span th:text="${mascota.raza}"></span></p>
+            <p><strong>Peso:</strong> <span th:text="${mascota.peso}"></span> kg</p>
+            <p><strong>Tiene Chip:</strong> <span th:text="${mascota.tieneChip ? 'Sí' : 'No'}"></span></p>
+            <p><strong>Propietario:</strong>
+                <form action="#" method="post" th:action="@{/mascotas/{id}/asignar-propietario(id=${mascota.id})}">
+					<select name="propietarioId" id="propietario-select" style="width: 300px;">
+					    <option value="">Sin propietario</option>
+					    <option th:each="propietario : ${propietarios}" 
+					            th:value="${propietario.id}" 
+					            th:text="${propietario.nombre + ' ' + propietario.primerApellido + ' ' + propietario.segundoApellido}">
+					    </option>
+					</select>
+                    <div class="btn-container">
+                        <button type="submit">Aceptar</button>
+                        <a th:href="@{/mascotas}" class="btn">Cancelar</a>
+                    </div>
+                </form>
+            </p>
+        </div>
+    </div>
+	<script>
+	    $(document).ready(function() {
+	        $('#propietario-select').select2({
+	            placeholder: 'Buscar nuevo propietario',
+	            allowClear: true,
+	            width: 'resolve',
+	            minimumResultsForSearch: 0, // Muestra el campo de búsqueda automáticamente
+	            dropdownAutoWidth: true, // Asegura que el desplegable se ajuste al ancho del contenedor
+	            language: {
+	                noResults: function() {
+	                    return "No se encontraron resultados";
+	                }
+	            }
+	        });
+	    });
+	</script>
+
+</body>
+</html>

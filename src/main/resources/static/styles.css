@@ -216,3 +216,89 @@ form {
 .cancel-link a:hover {
     text-decoration: underline;
 }
+
+/* Estilos para la página de detalles del propietario */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.details {
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.details p {
+    margin: 5px 0;
+}
+
+.mascotas {
+    list-style-type: none;
+    padding: 0;
+}
+
+.mascotas li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.mascota-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+}
+
+.mascota-img {
+    max-width: 50px;
+    height: auto;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.back-button {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos específicos para el botón de volver en la página de listar propietarios */
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+}
+
+.header .btn-back {
+    padding: 12px 20px;
+    font-size: 18px;
+    color: white;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.header .btn-back:hover {
+    background-color: #0056b3;
+}

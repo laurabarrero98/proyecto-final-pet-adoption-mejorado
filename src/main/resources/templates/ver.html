@@ -16,8 +16,9 @@
             <p><strong>Raza:</strong> <span th:text="${mascota.raza}"></span></p>
             <p><strong>Peso:</strong> <span th:text="${mascota.peso}"></span> kg</p>
             <p><strong>Tiene Chip:</strong> <span th:text="${mascota.tieneChip ? 'Sí' : 'No'}"></span></p>
+            <p><strong>Propietario:</strong> <span th:text="${mascota.propietario != null ? mascota.propietario.nombre : 'Sin propietario'}"></span></p>
         </div>
-        <a th:href="@{/}" class="btn">Volver a la lista</a>
+        <a th:href="@{${redirectTo != null ? redirectTo : '/mascotas'}}" class="btn">Volver</a>
     </div>
 </body>
 </html>

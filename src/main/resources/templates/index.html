@@ -10,15 +10,15 @@
     <nav>
         <ul>
             <li><a th:href="@{/mascotas/crear}">Añadir mascota</a></li>
-            <li><a th:href="@{/mascotas/mas-jovenes}">Ver mascotas jóvenes</a></li>
-            <li><a th:href="@{/?sort=id}">Ordenar por ID</a></li>
-            <li><a th:href="@{/?sort=nombre}">Ordenar por nombre</a></li>
-			<li><a th:href="@{/propietarios/crear}">Añadir propietario</a></li>
-			<li><a th:href="@{/propietarios}">Ver propietarios</a></li>
-		 </ul>
+			<li><a th:href="@{/mascotas/mas-jovenes}">Ver mascotas jóvenes</a></li>
+            <li><a th:href="@{/mascotas/?sort=id}">Ordenar por ID</a></li>
+            <li><a th:href="@{/mascotas/?sort=nombre}">Ordenar por nombre</a></li>
+            <li><a th:href="@{/propietarios/crear}">Añadir propietario</a></li>
+            <li><a th:href="@{/propietarios/}">Ver propietarios</a></li>
+         </ul>
     </nav>
-    <form method="get" action="/" class="search-form">
-        <input type="text" name="search" th:value="${search}" placeholder="Buscar por nombre o raza" class="search-input"/>
+    <form method="get" action="/mascotas" class="search-form">
+        <input type="text" name="search" th:value="${search}" placeholder="Buscar por nombre, raza o propietario" class="search-input"/>
         <button type="submit" class="search-button">Buscar</button>
     </form>
     <table>
@@ -28,7 +28,7 @@
                 <th>Nombre</th>
                 <th>Raza</th>
                 <th>Foto</th>
-                <th>Propietario</th> <!-- Columna para el propietario -->
+                <th>Propietario</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -38,10 +38,16 @@
                 <td th:text="${mascota.nombre}"></td>
                 <td th:text="${mascota.raza}"></td>
                 <td><img th:src="@{${mascota.urlFoto}}" alt="Foto de ${mascota.nombre}" width="100" height="100"/></td>
-                <td th:text="${mascota.propietario != null ? mascota.propietario.nombre : 'Sin propietario'}"></td> <!-- Mostrar nombre del propietario o 'Sin propietario' -->
+                <td>
+                    <span th:if="${mascota.propietario != null}">
+                        <a th:href="@{/propietarios/{id}(id=${mascota.propietario.id})}" th:text="${mascota.propietario.nombre}"></a>
+                    </span>
+                    <span th:if="${mascota.propietario == null}">Sin propietario</span>
+                </td>
                 <td>
                     <a th:href="@{/mascotas/{id}(id=${mascota.id})}">Ver</a>
                     <a th:href="@{/mascotas/eliminar/{id}(id=${mascota.id})}" onclick="return confirm('¿Estás seguro de que quieres eliminar esta mascota?');">Eliminar</a>
+                    <a th:href="@{/mascotas/{id}/asignar-propietario(id=${mascota.id})}">Asignar/Cambiar propietario</a>
                 </td>
             </tr>
         </tbody>

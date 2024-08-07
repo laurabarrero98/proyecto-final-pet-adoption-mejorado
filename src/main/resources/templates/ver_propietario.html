@@ -6,29 +6,27 @@
     <link rel="stylesheet" th:href="@{/styles.css}" />
 </head>
 <body>
-    <h1 th:text="${propietario.nombre}"></h1>
-    <p th:text="'Email: ' + ${propietario.email}"></p>
-    
-    <h2>Mas mascotas:</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Foto</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="mascota : ${mascotas}">
-                <td>
-                    <a th:href="@{/mascotas/{id}(id=${mascota.id})}" th:text="${mascota.nombre}"></a>
-                </td>
-                <td>
-                    <img th:src="@{${mascota.urlFoto}}" alt="Foto de la mascota" style="max-width: 100px;"/>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <h1>Detalles del Propietario</h1>
 
-    <a th:href="@{/propietarios}">Volver</a>
+        <div class="details">
+            <p><strong>Nombre:</strong> <span th:text="${propietario.nombre}"></span></p>
+            <p><strong>Primer apellido:</strong> <span th:text="${propietario.primerApellido}"></span></p>
+            <p><strong>Segundo apellido:</strong> <span th:text="${propietario.segundoApellido}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${propietario.email}"></span></p>
+        </div>
+
+        <h2>Mascotas</h2>
+        <ul class="mascotas">
+            <li th:each="mascota : ${propietario.mascotas}">
+                <a th:href="@{/mascotas/{id}(id=${mascota.id})}" class="mascota-link">
+                    <img th:src="@{${mascota.urlFoto}}" alt="Foto de la mascota" class="mascota-img"/>
+                    <span th:text="${mascota.nombre}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <a class="back-button" th:href="@{/mascotas}">Volver</a>
+    </div>
 </body>
 </html>

@@ -1,6 +1,8 @@
 CREATE TABLE IF NOT EXISTS propietario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
+    primer_apellido VARCHAR(255) NOT NULL,
+    segundo_apellido VARCHAR(255),
     email VARCHAR(255) NOT NULL
 );
 

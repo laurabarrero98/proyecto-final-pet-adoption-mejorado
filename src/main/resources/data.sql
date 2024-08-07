@@ -1,9 +1,9 @@
 -- Insertar propietarios
-INSERT INTO propietario (nombre, email) VALUES
-('Juan Pérez', 'juan.perez@example.com'),
-('Ana García', 'ana.garcia@example.com'),
-('Luis Fernández', 'luis.fernandez@example.com'),
-('María López', 'maria.lopez@example.com');
+INSERT INTO propietario (nombre, primer_apellido, segundo_apellido, email) VALUES
+('Juan', 'Pérez', 'Hernandez', 'juan.perez@example.com'),
+('Ana', 'García', 'Luz', 'ana.garcia@example.com'),
+('Luis', 'Fernández', 'Pico', 'luis.fernandez@example.com'),
+('María', 'López', 'Gutierrez', 'maria.lopez@example.com');
 
 -- Insertar mascotas (algunas con propietario_id NULL porque no es necesario)
 INSERT INTO mascota (nombre, fecha_nac, raza, peso, tiene_chip, url_foto, propietario_id) VALUES

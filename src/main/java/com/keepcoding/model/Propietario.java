@@ -6,8 +6,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import lombok.Data;
 
@@ -22,14 +22,23 @@ public class Propietario {
     @NotNull
     @Size(min = 1, max = 50)
     private String nombre;
+    
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "primer_apellido")
+    private String primerApellido;
 
+    @Size(max = 50)
+    @Column(name = "segundo_apellido")
+    private String segundoApellido;
+    
     @NotNull
     @Size(min = 1, max = 50)
     private String email;
 
     @OneToMany(mappedBy = "propietario")
     @JsonIgnore    
-    private Set<Mascota> mascotas;
+    private List<Mascota> mascotas =  new ArrayList<>();;
     
     @Override
     public String toString() {
